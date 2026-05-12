@@ -19,3 +19,10 @@ URL `amqp://guest:guest@localhost:5672` berisi informasi koneksi ke RabbitMQ.
 - Port `5672` adalah port yang digunakan RabbitMQ untuk koneksi AMQP dari program.
 
 Dengan URL tersebut, subscriber saya akan mencoba terhubung ke RabbitMQ lokal menggunakan username `guest` dan password `guest`, lalu mendengarkan event dari queue `user_created`.
+
+## Simulating Slow Subscriber
+
+Pada eksperimen ini, saya mengaktifkan kembali baris:
+
+```rust
+thread::sleep(ten_millis);
