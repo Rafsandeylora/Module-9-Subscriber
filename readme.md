@@ -26,6 +26,11 @@ Pada eksperimen ini, saya mengaktifkan kembali baris:
 
 ```rust
 thread::sleep(ten_millis);
+```
+
+Dengan adanya delay pada subscriber, proses konsumsi message menjadi lebih lambat. Jika publisher dijalankan beberapa kali dalam waktu singkat, jumlah queued messages di RabbitMQ akan meningkat karena message masuk lebih cepat dibandingkan message yang diproses subscriber.
+
+![Slow subscriber queued messages](./images/slow-subscriber-queued-messages.png)
 
 ## Reflection and Running at Least Three Subscribers
 
@@ -37,8 +42,8 @@ Multiple subscribers membantu scalability karena sistem dapat menambah jumlah co
 
 Beberapa hal yang dapat diimprove dari kode publisher dan subscriber adalah menambahkan error handling yang lebih jelas, menghindari `unwrap()` agar program tidak langsung panic, menambahkan logging pada publisher agar terlihat event mana yang berhasil dikirim, dan mengganti `loop {}` kosong pada subscriber dengan mekanisme yang lebih efisien agar tidak membuang CPU.
 
-![Three subscribers terminals](images/three-subscribers-terminals.png)
+![Three subscribers terminals](./images/three-subscribers-terminals.png)
 
-![Three subscribers RabbitMQ chart](images/three-subscribers-rabbitmq-chart.png)
+![Three subscribers RabbitMQ chart](./images/three-subscribers-rabbitmq-chart.png)
 
-![Three subscribers publisher output](images/three-subscribers-publisher-output.png)
+![Three subscribers publisher output](./images/three-subscribers-publisher-output.png)
